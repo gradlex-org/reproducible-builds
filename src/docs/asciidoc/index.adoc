@@ -1,0 +1,62 @@
+= Reproducible Builds Gradle plugin
+
+image:https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fgradlex-org%2Freproducible-builds%2Fbadge%3Fref%3Dmain&style=flat["Build Status", link="https://actions-badge.atrox.dev/gradlex-org/reproducible-builds/goto?ref=main"]
+image:https://img.shields.io/maven-metadata/v?label=Plugin%20Portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fde%2Fgradlex-org%2Freproducible-builds%2Forg.gradlex.reproducible-builds.gradle.plugin%2Fmaven-metadata.xml["Gradle Plugin Portal", link="https://plugins.gradle.org/plugin/org.gradlex.reproducible-builds"]
+
+Reproducibility settings applied to some of Gradle's built-in task, that should really be the default.
+Compatible with Java 8 and Gradle 8.3 or later.
+
+== Usage
+
+Apply this plugin all projects in your build, and it will configure archive and compilation tasks for reproducibility.
+
+[source.multi-language-sample,kotlin]
+----
+plugins {
+    id("org.gradlex.reproducible-builds")
+}
+----
+[source.multi-language-sample,groovy]
+----
+plugins {
+    id('org.gradlex.reproducible-builds')
+}
+----
+
+== What this plugin does
+
+This sections explains each of the configurations the plugin applies to your build.
+
+=== Archive tasks
+
+.Table Configuration applied to tasks of type `AbstractArchiveTask`
+|===
+|Setting|Value|Explanation
+
+|`preserveFileTimestamps`
+|`false`
+|If not configured, files inside the archive will have timestamps related to when the files where created.
+
+|`reproducibleFileOrder`
+|true
+|If not configured, the order of entries in the archive depends on the underlying filesystem of the machine that creates the archive.
+
+|`dirPermissions`
+|`unix(755)`
+|
+
+|`filePermissions`
+|`unix(644)`
+|
+|===
+
+=== Compilation tasks
+
+.Table Configuration applied to tasks of type `JavaCompile`, `JavaDoc`, `GroovyCompile`, and `ScalaCompile`
+|===
+|Setting|Value|Explanation
+
+|`options.encoding`
+|`UTF_8`
+|If not configured, the platform encoding will be used.
+
