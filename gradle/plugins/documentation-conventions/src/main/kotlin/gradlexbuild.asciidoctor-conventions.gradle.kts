@@ -23,8 +23,8 @@ tasks {
             "samples-path" to "$projectDir/src/docs/samples"
         ))
 
-        inputs.dir("src/docs/samples")
-                .withPathSensitivity(PathSensitivity.RELATIVE)
-                .withPropertyName("samples")
+        // inputs.dir("src/docs/samples")
+        //         .withPathSensitivity(PathSensitivity.RELATIVE)
+        //         .withPropertyName("samples")
     }
 }

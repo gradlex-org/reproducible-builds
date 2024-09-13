@@ -59,3 +59,4 @@ This sections explains each of the configurations the plugin applies to your bui
 |`options.encoding`
 |`UTF_8`
 |If not configured, the platform encoding is used.
+|===
