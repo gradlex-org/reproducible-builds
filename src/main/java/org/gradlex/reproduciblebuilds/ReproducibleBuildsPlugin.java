@@ -15,6 +15,7 @@
  */
 package org.gradlex.reproduciblebuilds;
 
+import org.gradle.api.NonNullApi;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.tasks.bundling.AbstractArchiveTask;
@@ -25,7 +26,8 @@ import org.gradle.api.tasks.scala.ScalaCompile;
 
 import java.nio.charset.StandardCharsets;
 
-public class ReproducibleBuildsPlugin implements Plugin<Project> {
+@NonNullApi
+public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
