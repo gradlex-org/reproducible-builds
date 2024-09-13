@@ -16,7 +16,7 @@ pluginPublishConventions {
     id("${project.group}.${project.name}")
     implementationClass("org.gradlex.reproduciblebuilds.ReproducibleBuildsPlugin")
     displayName("Reproducible Builds Gradle Plugin")
-    description("Compile-safe access to parameters supplied to a Gradle build.")
+    description("Reproducibility settings applied to Gradle's built-in tasks.")
     tags("gradlex", "reproducible builds")
     gitHub("https://github.com/gradlex-org/reproducible-builds")
     website("https://gradlex.org/reproducible-builds")
