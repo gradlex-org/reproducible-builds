@@ -39,16 +39,16 @@ public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
         });
 
         project.getTasks().withType(JavaCompile.class).configureEach(task -> {
-            task.getOptions().setEncoding(StandardCharsets.UTF_8.displayName());
+            task.getOptions().setEncoding(StandardCharsets.UTF_8.name());
         });
         project.getTasks().withType(Javadoc.class).configureEach(task -> {
-            task.getOptions().setEncoding(StandardCharsets.UTF_8.displayName());
+            task.getOptions().setEncoding(StandardCharsets.UTF_8.name());
         });
         project.getTasks().withType(GroovyCompile.class).configureEach(task -> {
-            task.getOptions().setEncoding(StandardCharsets.UTF_8.displayName());
+            task.getOptions().setEncoding(StandardCharsets.UTF_8.name());
         });
         project.getTasks().withType(ScalaCompile.class).configureEach(task -> {
-            task.getOptions().setEncoding(StandardCharsets.UTF_8.displayName());
+            task.getOptions().setEncoding(StandardCharsets.UTF_8.name());
         });
     }
 }
