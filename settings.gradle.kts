@@ -1,7 +1,3 @@
-import buildparameters.BuildParametersExtension
-
-rootProject.name = "reproducible-builds"
-
 pluginManagement {
     includeBuild("gradle/plugins")
 }
@@ -11,6 +7,8 @@ plugins {
     id("com.gradle.common-custom-user-data-gradle-plugin") version "2.0.2"
     id("gradlexbuild.build-parameters")
 }
+
+rootProject.name = "reproducible-builds"
 
 dependencyResolutionManagement {
     repositories.mavenCentral()
@@ -22,7 +20,7 @@ develocity {
         termsOfUseAgree = "yes"
 
         // required to bind this to a local variable for configuration cache compatibility
-        val isCi = the<BuildParametersExtension>().ci
+        val isCi = buildParameters.ci
         publishing.onlyIf { isCi }
     }
 }
