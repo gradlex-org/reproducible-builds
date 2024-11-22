@@ -26,6 +26,8 @@ import org.gradle.api.tasks.scala.ScalaCompile;
 
 import java.nio.charset.StandardCharsets;
 
+import static java.lang.Integer.toOctalString;
+
 @NonNullApi
 public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
 
@@ -35,7 +37,11 @@ public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
             task.setPreserveFileTimestamps(false);
             task.setReproducibleFileOrder(true);
             task.dirPermissions(p -> p.unix("755"));
-            task.filePermissions(p -> p.unix("644"));
+            task.eachFile(file -> {
+                if (toOctalString(file.getPermissions().toUnixNumeric()).equals("644")) {
+                    file.permissions(p -> p.unix("644"));
+                }
+            });
         });
 
         project.getTasks().withType(JavaCompile.class).configureEach(task -> {
