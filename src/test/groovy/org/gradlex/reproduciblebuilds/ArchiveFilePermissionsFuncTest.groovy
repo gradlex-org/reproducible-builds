@@ -65,6 +65,8 @@ class ArchiveFilePermissionsFuncTest extends Specification {
         buildFile << """
         tasks.distZip {
                 doFirst {
+                    // Simulate that Gradle gets an unexpected (or no) value for permissions from the
+                    // underlying file system by changing the permission of a file on file system level.
                     exec { commandLine 'chmod', '0444', 'build/libs/test-project.jar' }
                 }
             }
