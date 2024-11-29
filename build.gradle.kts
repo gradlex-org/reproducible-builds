@@ -41,6 +41,9 @@ testing.suites.named<JvmTestSuite>("test") {
     useJUnitJupiter()
     dependencies {
         implementation("org.spockframework:spock-core:2.3-groovy-3.0")
+        implementation("org.apache.commons:commons-compress:1.27.1") {
+            because("For asserting file permissions in zip files")
+        }
     }
     targets.all {
         testTask { maxParallelForks = 4 }

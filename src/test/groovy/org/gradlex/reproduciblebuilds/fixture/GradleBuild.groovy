@@ -36,6 +36,8 @@ class GradleBuild {
         this.buildFile = new File(projectDir, "build.gradle")
         this.settingsFile = new File(projectDir, "settings.gradle")
         this.gradleProperties = new File(projectDir, "gradle.properties")
+
+        this.settingsFile << "rootProject.name = 'test-project'\n"
     }
 
     BuildResult build(String... args) {
