@@ -23,14 +23,21 @@ import org.gradle.api.tasks.compile.GroovyCompile;
 import org.gradle.api.tasks.compile.JavaCompile;
 import org.gradle.api.tasks.javadoc.Javadoc;
 import org.gradle.api.tasks.scala.ScalaCompile;
+import org.gradle.util.GradleVersion;
 
 import java.nio.charset.StandardCharsets;
 
 @NonNullApi
 public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
 
+    private static final GradleVersion MINIMUM_SUPPORTED_VERSION = GradleVersion.version("8.3");
+
     @Override
     public void apply(Project project) {
+        if (GradleVersion.current().compareTo(MINIMUM_SUPPORTED_VERSION) < 0) {
+            throw new IllegalStateException("Plugin requires at least Gradle " + MINIMUM_SUPPORTED_VERSION.getVersion());
+        }
+
         project.getTasks().withType(AbstractArchiveTask.class).configureEach(task -> {
             task.setPreserveFileTimestamps(false);
             task.setReproducibleFileOrder(true);
