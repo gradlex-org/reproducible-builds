@@ -1,5 +1,4 @@
 plugins {
-    id("groovy")
     id("gradlexbuild.build-parameters")
     id("gradlexbuild.documentation-conventions")
     id("org.gradlex.internal.plugin-publish-conventions") version "0.6"
@@ -37,16 +36,28 @@ pluginPublishConventions {
     }
 }
 
+tasks.compileTestJava {
+    javaCompiler = javaToolchains.compilerFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 testing.suites.named<JvmTestSuite>("test") {
     useJUnitJupiter()
     dependencies {
-        implementation("org.spockframework:spock-core:2.3-groovy-3.0")
+        implementation(platform("org.junit:junit-bom:5.11.4"))
+        implementation("org.junit.jupiter:junit-jupiter")
         implementation("org.apache.commons:commons-compress:1.27.1") {
             because("For asserting file permissions in zip files")
         }
     }
     targets.all {
-        testTask { maxParallelForks = 4 }
+        testTask {
+            maxParallelForks = 4
+            javaLauncher = project.javaToolchains.launcherFor {
+                languageVersion = JavaLanguageVersion.of(17)
+            }
+        }
     }
 }
 
