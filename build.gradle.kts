@@ -45,8 +45,6 @@ tasks.compileTestJava {
 testing.suites.named<JvmTestSuite>("test") {
     useJUnitJupiter()
     dependencies {
-        implementation(platform("org.junit:junit-bom:5.11.4"))
-        implementation("org.junit.jupiter:junit-jupiter")
         implementation("org.apache.commons:commons-compress:1.27.1") {
             because("For asserting file permissions in zip files")
         }
