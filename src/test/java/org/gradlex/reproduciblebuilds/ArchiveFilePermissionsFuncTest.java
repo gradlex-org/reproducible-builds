@@ -33,12 +33,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-public class ArchiveFilePermissionsFuncTest {
+class ArchiveFilePermissionsFuncTest {
 
     GradleBuild build = GradleBuild.create();
 
     @BeforeEach
-    public void beforeEach() {
+    void beforeEach() {
         build.getBuildFile().writeText("""
                 plugins {
                     id 'application'
@@ -57,13 +57,13 @@ public class ArchiveFilePermissionsFuncTest {
     }
 
     @AfterEach
-    public void afterEach() {
+    void afterEach() {
         build.close();
     }
 
     // https://github.com/gradlex-org/reproducible-builds/issues/7
     @Test
-    public void plugin_does_not_override_permissions_set_by_application_plugin() {
+    void plugin_does_not_override_permissions_set_by_application_plugin() {
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
 
         build.run("build");
@@ -73,7 +73,7 @@ public class ArchiveFilePermissionsFuncTest {
     }
 
     @Test
-    public void plugin_sets_all_file_permissions_in_archives_to_not_rely_on_underlying_file_system() {
+    void plugin_sets_all_file_permissions_in_archives_to_not_rely_on_underlying_file_system() {
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
         build.getBuildFile().appendText("""
                 tasks.distZip {

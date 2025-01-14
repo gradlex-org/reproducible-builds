@@ -23,17 +23,17 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-public class ReproducibleBuildsPluginFuncTest {
+class ReproducibleBuildsPluginFuncTest {
 
     GradleBuild build = GradleBuild.create();
 
     @AfterEach
-    public void afterEach() {
+    void afterEach() {
         build.close();
     }
 
     @Test
-    public void plugin_can_be_applied_to_a_project() {
+    void plugin_can_be_applied_to_a_project() {
         build.getBuildFile().writeText("""
                 plugins {
                     id 'java'
