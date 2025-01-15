@@ -16,7 +16,6 @@
 
 package org.gradlex.reproduciblebuilds.fixture;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -30,28 +29,15 @@ public class WritableFile {
     }
 
     public WritableFile(Path parent, String fileName) {
-        try {
-            Files.createDirectories(parent);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        this.file = parent.resolve(fileName);
+        this.file = Io.unchecked(() -> Files.createDirectories(parent)).resolve(fileName);
     }
 
     public void writeText(String text) {
-        try {
-            Files.writeString(file, text, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Io.unchecked(() -> Files.writeString(file, text, StandardOpenOption.CREATE, StandardOpenOption.WRITE));
     }
 
     public void appendText(String text) {
-        try {
-            Files.writeString(file, text, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Io.unchecked(() -> Files.writeString(file, text, StandardOpenOption.CREATE, StandardOpenOption.APPEND));
     }
 
     public boolean exists() {

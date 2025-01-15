@@ -19,7 +19,6 @@ package org.gradlex.reproduciblebuilds.fixture;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 
-import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,12 +43,7 @@ public class GradleBuild implements AutoCloseable {
     }
 
     public static GradleBuild create() {
-        try {
-            Path projectDirectory = Files.createTempDirectory("gradle-build");
-            return create(projectDirectory);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return create(Io.unchecked(() -> Files.createTempDirectory("gradle-build")));
     }
 
     public static GradleBuild create(Path projectDirectory) {

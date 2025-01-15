@@ -28,18 +28,18 @@ public class Directory {
 
     Directory(Path directory) {
         this.directory = directory;
-        mkdirs(directory);
+        Io.unchecked(() -> Files.createDirectories(directory));
     }
 
     public WritableFile file(String path) {
         Path file = directory.resolve(path);
-        mkdirs(file.getParent());
+        Io.unchecked(() -> Files.createDirectories(file.getParent()));
         return new WritableFile(file);
     }
 
     public Directory dir(String path) {
         Path dir = directory.resolve(path);
-        mkdirs(dir);
+        Io.unchecked(() -> Files.createDirectories(dir));
         return new Directory(dir);
     }
 
@@ -47,7 +47,7 @@ public class Directory {
         try (Stream<Path> walk = Files.walk(directory)) {
             walk
                     .sorted(Comparator.reverseOrder())
-                    .forEach(Directory::delete);
+                    .forEach(p -> Io.unchecked(p, Files::delete));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,19 +57,4 @@ public class Directory {
         return directory;
     }
 
-    private static void mkdirs(Path directory) {
-        try {
-            Files.createDirectories(directory);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static void delete(Path f) {
-        try {
-            Files.delete(f);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
