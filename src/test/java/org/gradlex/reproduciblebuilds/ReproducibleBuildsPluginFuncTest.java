@@ -17,7 +17,7 @@
 package org.gradlex.reproduciblebuilds;
 
 import org.gradlex.reproduciblebuilds.fixture.GradleBuild;
-import org.junit.jupiter.api.AfterEach;
+import org.gradlex.reproduciblebuilds.fixture.TestProject;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -25,15 +25,8 @@ import org.junit.jupiter.api.Test;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class ReproducibleBuildsPluginFuncTest {
 
-    GradleBuild build = GradleBuild.create();
-
-    @AfterEach
-    void afterEach() {
-        build.close();
-    }
-
     @Test
-    void plugin_can_be_applied_to_a_project() {
+    void plugin_can_be_applied_to_a_project(@TestProject GradleBuild build) {
         build.getBuildFile().writeText("""
                 plugins {
                     id 'java'

@@ -19,8 +19,8 @@ package org.gradlex.reproduciblebuilds;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.gradlex.reproduciblebuilds.fixture.GradleBuild;
+import org.gradlex.reproduciblebuilds.fixture.TestProject;
 import org.gradlex.reproduciblebuilds.fixture.WritableFile;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -35,10 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class ArchiveFilePermissionsFuncTest {
 
-    GradleBuild build = GradleBuild.create();
-
     @BeforeEach
-    void beforeEach() {
+    void beforeEach(@TestProject GradleBuild build) {
         build.getBuildFile().writeText("""
                 plugins {
                     id 'application'
@@ -56,14 +54,9 @@ class ArchiveFilePermissionsFuncTest {
                 """);
     }
 
-    @AfterEach
-    void afterEach() {
-        build.close();
-    }
-
     // https://github.com/gradlex-org/reproducible-builds/issues/7
     @Test
-    void plugin_does_not_override_permissions_set_by_application_plugin() {
+    void plugin_does_not_override_permissions_set_by_application_plugin(@TestProject GradleBuild build) {
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
 
         build.run("build");
@@ -73,7 +66,7 @@ class ArchiveFilePermissionsFuncTest {
     }
 
     @Test
-    void plugin_sets_all_file_permissions_in_archives_to_not_rely_on_underlying_file_system() {
+    void plugin_sets_all_file_permissions_in_archives_to_not_rely_on_underlying_file_system(@TestProject GradleBuild build) {
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
         build.getBuildFile().appendText("""
                 tasks.distZip {
