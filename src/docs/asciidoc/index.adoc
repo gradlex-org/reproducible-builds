@@ -1,7 +1,7 @@
 = Reproducible Builds Gradle plugin
 
-image:https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fgradlex-org%2Freproducible-builds%2Fbadge%3Fref%3Dmain&style=flat["Build Status", link="https://actions-badge.atrox.dev/gradlex-org/reproducible-builds/goto?ref=main"]
-image:https://img.shields.io/maven-metadata/v?label=Plugin%20Portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fde%2Fgradlex-org%2Freproducible-builds%2Forg.gradlex.reproducible-builds.gradle.plugin%2Fmaven-metadata.xml["Gradle Plugin Portal", link="https://plugins.gradle.org/plugin/org.gradlex.reproducible-builds"]
+image:https://github.com/gradlex-org/reproducible-builds/actions/workflows/ci-build.yml/badge.svg["CI Build", link="https://github.com/gradlex-org/reproducible-builds/actions/workflows/ci-build.yml"]
+image:https://img.shields.io/gradle-plugin-portal/v/org.gradlex.reproducible-builds?label=Plugin%20Portal["Gradle Plugin Portal", link="https://plugins.gradle.org/plugin/org.gradlex.reproducible-builds"]
 
 Reproducibility settings applied to some of Gradle's built-in tasks, that should really be the default.
 Compatible with Java 8 and Gradle 8.3 or later.
