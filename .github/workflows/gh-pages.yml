@@ -24,6 +24,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           java-version: 17
+          distribution: temurin
       - uses: gradle/actions/setup-gradle@v4
       - run: "./gradlew :asciidoctor --no-configuration-cache"
       - uses: actions/upload-pages-artifact@v3
