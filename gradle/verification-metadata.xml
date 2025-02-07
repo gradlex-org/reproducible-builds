@@ -28,10 +28,7 @@
          <trusted-key id="3F2A008A91D11A7FAC4A0786F13D3E721D56BD54" group="org.reflections" name="reflections"/>
          <trusted-key id="416952B945B78A34C6C7678562EBFC78FE4156D1" group="org.jruby" name="jruby-complete"/>
          <trusted-key id="4C5F68D09D42BA7FAC888DF9A929EA2321FDBF8F" group="net.sf.saxon" name="Saxon-HE"/>
-         <trusted-key id="66D7CBFF956830FE9F5A723AFE6C7D77A1CE15A6">
-            <trusting group="org.gradlex" name="build-parameters"/>
-            <trusting group="org.gradlex" name="plugin-publish-conventions"/>
-         </trusted-key>
+         <trusted-key id="66D7CBFF956830FE9F5A723AFE6C7D77A1CE15A6" group="org.gradlex"/>
          <trusted-key id="694621A7227D8D5289699830ABE9F3126BB741C1" group="com.google.guava"/>
          <trusted-key id="6F538074CCEBF35F28AF9B066A0975F8B1127B83" group="org.jetbrains.kotlin"/>
          <trusted-key id="7616EB882DAF57A11477AAF559A252FB1199D873" group="com.google.code.findbugs" name="jsr305"/>
