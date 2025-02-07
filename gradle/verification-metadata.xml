@@ -69,15 +69,5 @@
             <sha256 value="f3448ca295830c56202723d04347c7bb56240bf9143d047329083d9e41e166d6" origin="Recovered by downloading the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-jvm/4.0.4 and generating the checksum locally" reason="Artifact is not signed"/>
          </artifact>
       </component>
-      <component group="org.asciidoctor" name="asciidoctorj" version="2.5.7">
-         <artifact name="asciidoctorj-2.5.7.jar">
-            <sha256 value="17deb7ab1ea8e62f43e7c85843b252e684e9000ca539fdbc1a903748623496b2" origin="Recovered from https://repo1.maven.org/maven2/org/asciidoctor/asciidoctorj/2.5.7" reason="A key couldn't be downloaded"/>
-         </artifact>
-      </component>
-      <component group="org.asciidoctor" name="asciidoctorj-api" version="2.5.7">
-         <artifact name="asciidoctorj-api-2.5.7.jar">
-            <sha256 value="3fe1e4a778bf2ad73c756d4be5f6b983e4002c407e2e29a04fda7f36e6faa5d5" origin="Recovered from https://repo1.maven.org/maven2/org/asciidoctor/asciidoctorj-api/2.5.7" reason="A key couldn't be downloaded"/>
-         </artifact>
-      </component>
    </components>
 </verification-metadata>
