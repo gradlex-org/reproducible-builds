@@ -8,7 +8,17 @@ group = "org.gradlex"
 version = "1.0"
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(8)
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+tasks.compileJava {
+    options.release = 8
+    options.compilerArgs.add("-Werror")
+}
+
+tasks.javadoc {
+    // Enable all JavaDoc checks, but the one requiring JavaDoc everywhere
+    (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:all,-missing", "-Xwerror")
 }
 
 pluginPublishConventions {
@@ -36,12 +46,6 @@ pluginPublishConventions {
     }
 }
 
-tasks.compileTestJava {
-    javaCompiler = javaToolchains.compilerFor {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
 testing.suites.named<JvmTestSuite>("test") {
     useJUnitJupiter()
     dependencies {
@@ -52,9 +56,6 @@ testing.suites.named<JvmTestSuite>("test") {
     targets.all {
         testTask {
             maxParallelForks = 4
-            javaLauncher = project.javaToolchains.launcherFor {
-                languageVersion = JavaLanguageVersion.of(17)
-            }
         }
     }
 }
