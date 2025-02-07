@@ -61,12 +61,12 @@
    <components>
       <component group="org.asciidoctor" name="asciidoctor-gradle-base" version="4.0.4">
          <artifact name="asciidoctor-gradle-base-4.0.4.jar">
-            <sha256 value="a166d8ceab124de10093d65c63444cf6ce4015b564158a1cdce56e1c8864721c" origin="Recovered by downloading the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-base/4.0.4 and generating the checksum locally" reason="Artifact is not signed"/>
+            <sha256 value="a166d8ceab124de10093d65c63444cf6ce4015b564158a1cdce56e1c8864721c" origin="Downloaded the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-base/4.0.4 and generated the checksum locally" reason="Artifact is not signed"/>
          </artifact>
       </component>
       <component group="org.asciidoctor" name="asciidoctor-gradle-jvm" version="4.0.4">
          <artifact name="asciidoctor-gradle-jvm-4.0.4.jar">
-            <sha256 value="f3448ca295830c56202723d04347c7bb56240bf9143d047329083d9e41e166d6" origin="Recovered by downloading the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-jvm/4.0.4 and generating the checksum locally" reason="Artifact is not signed"/>
+            <sha256 value="f3448ca295830c56202723d04347c7bb56240bf9143d047329083d9e41e166d6" origin="Downloaded the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-jvm/4.0.4 and generated the checksum locally" reason="Artifact is not signed"/>
          </artifact>
       </component>
    </components>
