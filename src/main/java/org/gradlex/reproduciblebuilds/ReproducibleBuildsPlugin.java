@@ -23,9 +23,10 @@ import org.gradle.api.tasks.compile.GroovyCompile;
 import org.gradle.api.tasks.compile.JavaCompile;
 import org.gradle.api.tasks.javadoc.Javadoc;
 import org.gradle.api.tasks.scala.ScalaCompile;
+import org.gradle.external.javadoc.StandardJavadocDocletOptions;
 import org.gradle.util.GradleVersion;
 
-import java.nio.charset.StandardCharsets;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @NonNullApi
 public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
@@ -46,16 +47,23 @@ public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
         });
 
         project.getTasks().withType(JavaCompile.class).configureEach(task -> {
-            task.getOptions().setEncoding(StandardCharsets.UTF_8.name());
+            task.getOptions().setEncoding(UTF_8.name());
         });
         project.getTasks().withType(Javadoc.class).configureEach(task -> {
-            task.getOptions().setEncoding(StandardCharsets.UTF_8.name());
+            task.getOptions().setEncoding(UTF_8.name());
+            if (task.getOptions() instanceof StandardJavadocDocletOptions) {
+                StandardJavadocDocletOptions docletOptions = (StandardJavadocDocletOptions) task.getOptions();
+                docletOptions.setCharSet(UTF_8.name());
+                docletOptions.setDocEncoding(UTF_8.name());
+            }
         });
         project.getTasks().withType(GroovyCompile.class).configureEach(task -> {
-            task.getOptions().setEncoding(StandardCharsets.UTF_8.name());
+            task.getOptions().setEncoding(UTF_8.name());
+            task.getGroovyOptions().setEncoding(UTF_8.name());
         });
         project.getTasks().withType(ScalaCompile.class).configureEach(task -> {
-            task.getOptions().setEncoding(StandardCharsets.UTF_8.name());
+            task.getOptions().setEncoding(UTF_8.name());
+            task.getScalaCompileOptions().setEncoding(UTF_8.name());
         });
     }
 }
