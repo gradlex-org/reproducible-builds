@@ -87,6 +87,10 @@ public class GradleBuild implements AutoCloseable {
         return runner;
     }
 
+    public String output(String path) {
+        return Io.unchecked(() -> Files.readString(projectDir.getAsPath().resolve("build").resolve(path)));
+    }
+
     public void close() {
         projectDir.delete();
     }
