@@ -16,7 +16,6 @@
 
 package org.gradlex.reproduciblebuilds;
 
-import org.gradle.internal.impldep.org.bouncycastle.util.Strings;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradlex.reproduciblebuilds.fixture.GradleBuild;
 import org.gradlex.reproduciblebuilds.fixture.TestProject;
@@ -25,6 +24,7 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,12 +37,10 @@ class EncodingFuncTest {
     void plugin_sets_encoding_to_utf8(@TestProject GradleBuild build) {
         String data;
         try(var is = EncodingFuncTest.class.getResourceAsStream("utf8.txt")) {
-            data = Strings.fromUTF8ByteArray(Objects.requireNonNull(is).readAllBytes());
+            data = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        System.out.println("Test Data: " + data);
         
         build.getBuildFile().writeText("""
                 plugins {
