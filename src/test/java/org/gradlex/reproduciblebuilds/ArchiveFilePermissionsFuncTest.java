@@ -25,6 +25,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -66,6 +68,7 @@ class ArchiveFilePermissionsFuncTest {
     }
 
     @Test
+    @DisabledOnOs(OS.WINDOWS)
     void plugin_sets_all_file_permissions_in_archives_to_not_rely_on_underlying_file_system(@TestProject GradleBuild build) {
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
         build.getBuildFile().appendText("""
