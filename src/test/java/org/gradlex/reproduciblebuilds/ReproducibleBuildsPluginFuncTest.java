@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 the GradleX team.
+ * Copyright the GradleX team.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ class ReproducibleBuildsPluginFuncTest {
         build.getProjectDir().file("src/main/groovy/GroovyClass.groovy").writeText("""
                 class GroovyClass {}
                 """);
-        build.getProjectDir().file("src/main/scala/ScalaClass.java").writeText("""
+        build.getProjectDir().file("src/main/scala/ScalaClass.scala").writeText("""
                 class ScalaClass {}
                 """);
 
