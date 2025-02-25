@@ -139,7 +139,7 @@ class EncodingFuncTest {
         assertTrue(build.output("docs/javadoc/JavaClass.html").contains(data));
         assertTrue(build.output("docs/javadoc/JavaClassInGroovyFolder.html").contains(data));
         assertTrue(build.output("docs/javadoc/JavaClassInScalaFolder.html").contains(data));
-        // assertTrue(build.output("docs/groovydoc/DefaultPackage/GroovyClass.html").contains(data));
-        // assertTrue(build.output("docs/scaladoc/ScalaClass$.html").contains(data));
+        assertTrue(build.output("docs/scaladoc/ScalaClass$.html").contains(data));
+        assertTrue(build.output("docs/groovydoc/DefaultPackage/GroovyClass.html").contains(data));
     }
 }
