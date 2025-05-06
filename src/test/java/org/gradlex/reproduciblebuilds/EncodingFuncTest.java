@@ -123,6 +123,9 @@ class EncodingFuncTest {
                 object ScalaClass { def print = { println("4 $DATA"); } }
                 """.replace("$DATA", data));
 
+        // Run 'groovydoc' first so that it is UP-TO-DATE in the next execution.
+        // Workaround for: https://github.com/gradle/gradle/issues/33288
+        build.run("groovydoc");
         BuildResult result = build.run("build", "run", "-q");
 
         assertEquals(
