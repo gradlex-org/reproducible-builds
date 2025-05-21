@@ -123,10 +123,11 @@ class EncodingFuncTest {
                 object ScalaClass { def print = { println("4 $DATA"); } }
                 """.replace("$DATA", data));
 
-        // Run 'groovydoc' first so that it is UP-TO-DATE in the next execution.
-        // Workaround for: https://github.com/gradle/gradle/issues/33288
-        build.run("groovydoc");
         BuildResult result = build.run("build", "run", "-q");
+
+        String normalizedOutput = result.getOutput()
+                .replace("\r\n", "\n")
+                .replace("\nResource org/apache/groovy/docgenerator/groovy.ico not found so skipped", "");
 
         assertEquals(
                 """
@@ -135,7 +136,7 @@ class EncodingFuncTest {
                 2 $DATA
                 3 $DATA
                 4 $DATA
-                """.replace("$DATA", data), result.getOutput().replace("\r\n", "\n"));
+                """.replace("$DATA", data), normalizedOutput);
 
         assertTrue(build.output("docs/javadoc/JavaClass.html").contains(data));
         assertTrue(build.output("docs/javadoc/JavaClassInGroovyFolder.html").contains(data));
