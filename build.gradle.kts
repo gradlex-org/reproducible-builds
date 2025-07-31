@@ -49,7 +49,7 @@ pluginPublishConventions {
 testing.suites.named<JvmTestSuite>("test") {
     useJUnitJupiter()
     dependencies {
-        implementation("org.apache.commons:commons-compress:1.27.1") {
+        implementation("org.apache.commons:commons-compress:1.28.0") {
             because("For asserting file permissions in zip files")
         }
     }
