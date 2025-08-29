@@ -15,7 +15,6 @@
  */
 package org.gradlex.reproduciblebuilds;
 
-import org.gradle.api.NonNullApi;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.tasks.bundling.AbstractArchiveTask;
@@ -25,10 +24,11 @@ import org.gradle.api.tasks.javadoc.Javadoc;
 import org.gradle.api.tasks.scala.ScalaCompile;
 import org.gradle.external.javadoc.StandardJavadocDocletOptions;
 import org.gradle.util.GradleVersion;
+import org.jspecify.annotations.NullMarked;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-@NonNullApi
+@NullMarked
 public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
 
     private static final GradleVersion MINIMUM_SUPPORTED_VERSION = GradleVersion.version("8.3");

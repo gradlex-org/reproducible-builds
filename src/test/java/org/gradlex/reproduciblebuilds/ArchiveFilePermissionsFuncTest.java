@@ -45,7 +45,7 @@ class ArchiveFilePermissionsFuncTest {
                     id 'org.gradlex.reproducible-builds'
                 }
                 application {
-                    mainClassName = 'org.example.App'
+                    mainClass = 'org.example.App'
                 }
                 """);
         build.getProjectDir().file("src/main/java/org/example/App.java").writeText("""
@@ -72,11 +72,17 @@ class ArchiveFilePermissionsFuncTest {
     void plugin_sets_all_file_permissions_in_archives_to_not_rely_on_underlying_file_system(@TestProject GradleBuild build) {
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
         build.getBuildFile().appendText("""
+                interface InjectedExecOps {
+                    @Inject //@javax.inject.Inject
+                    ExecOperations getExecOps()
+                }
                 tasks.distZip {
+                    def injected = project.objects.newInstance(InjectedExecOps)
+
                     doFirst {
                         // Simulate that Gradle gets an unexpected (or no) value for permissions from the
                         // underlying file system by changing the permission of a file on file system level.
-                        exec { commandLine 'chmod', '0444', 'build/libs/test-project.jar' }
+                        injected.execOps.exec { commandLine 'chmod', '0444', 'build/libs/test-project.jar' }
                     }
                 }
                 """);
