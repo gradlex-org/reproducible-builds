@@ -21,6 +21,11 @@ tasks.javadoc {
     (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:all,-missing", "-Xwerror")
 }
 
+checkstyle {
+    // use default version Gradle 8.14 shipped with
+    toolVersion = "9.3"
+}
+
 pluginPublishConventions {
     id("${project.group}.${project.name}")
     implementationClass("org.gradlex.reproduciblebuilds.ReproducibleBuildsPlugin")
