@@ -18,5 +18,5 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - run: "./gradlew :check"
