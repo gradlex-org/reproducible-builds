@@ -23,7 +23,7 @@ tasks.javadoc {
 
 checkstyle {
     // use default version Gradle 8.14 shipped with
-    toolVersion = "9.3"
+    toolVersion = "11.1.0"
 }
 
 pluginPublishConventions {
