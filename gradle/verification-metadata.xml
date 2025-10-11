@@ -10,8 +10,12 @@
          <trust file=".*-sources[.]jar" regex="true"/>
          <trust file="^gradle-\d+\.\d+(?:\.\d+)?(?:-(?:rc|milestone)-\d+)?-src\.zip$" regex="true"/>
       </trusted-artifacts>
+      <ignored-keys>
+         <ignored-key id="BAC30622339994C4" reason="Key couldn't be downloaded from any key server"/>
+      </ignored-keys>
       <trusted-keys>
          <trusted-key id="06D34ED6FF73DE368A772A781063FE98BCECB758" group="com.puppycrawl.tools" name="checkstyle"/>
+         <trusted-key id="0785B3EFF60B1B1BEA94E0BB7C25280EAE63EBE5" group="org.apache.httpcomponents"/>
          <trusted-key id="0CC641C3A62453AB390066C4A41F13C999945293" group="commons-collections" name="commons-collections"/>
          <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework" name="checker-qual"/>
          <trusted-key id="1BD97A6A154E7810EE0BC832E2F38302C8075E3D">
@@ -27,7 +31,10 @@
          <trusted-key id="3690C240CE51B4670D30AD1C38EE757D69184620" group="org.tukaani" name="xz"/>
          <trusted-key id="3F2A008A91D11A7FAC4A0786F13D3E721D56BD54" group="org.reflections" name="reflections"/>
          <trusted-key id="416952B945B78A34C6C7678562EBFC78FE4156D1" group="org.jruby" name="jruby-complete"/>
-         <trusted-key id="4C5F68D09D42BA7FAC888DF9A929EA2321FDBF8F" group="net.sf.saxon" name="Saxon-HE"/>
+         <trusted-key id="4C5F68D09D42BA7FAC888DF9A929EA2321FDBF8F">
+            <trusting group="net.sf.saxon" name="Saxon-HE"/>
+            <trusting group="org.xmlresolver" name="xmlresolver" version="5.3.3"/>
+         </trusted-key>
          <trusted-key id="66D7CBFF956830FE9F5A723AFE6C7D77A1CE15A6" group="org.gradlex"/>
          <trusted-key id="694621A7227D8D5289699830ABE9F3126BB741C1" group="com.google.guava"/>
          <trusted-key id="6F538074CCEBF35F28AF9B066A0975F8B1127B83" group="org.jetbrains.kotlin"/>
@@ -53,6 +60,10 @@
          <trusted-key id="E7DC75FC24FB3C8DFE8086AD3D5839A2262CBBFB" group="org.jetbrains.kotlinx" name="kotlinx-coroutines-core-jvm"/>
          <trusted-key id="EA022560A81E5BD48DB3D18B54AC8E2D98CFEAC6" group="org.ysb33r.gradle"/>
          <trusted-key id="EE0CA873074092F806F59B65D364ABAA39A47320" group="com.google.errorprone"/>
+         <trusted-key id="FA77DCFEF2EE6EB2DEBEDD2C012579464D01C06A">
+            <trusting group="org.apache.maven.doxia"/>
+            <trusting group="org.codehaus.plexus"/>
+         </trusted-key>
          <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51">
             <trusting group="org.apiguardian"/>
             <trusting group="org.opentest4j"/>
@@ -61,6 +72,26 @@
       </trusted-keys>
    </configuration>
    <components>
+      <component group="com.google.j2objc" name="j2objc-annotations" version="3.1">
+         <artifact name="j2objc-annotations-3.1.jar">
+            <pgp value="C3259D20DAEC4ACE6D57CC83340B090F727518D8"/>
+         </artifact>
+      </component>
+      <component group="commons-beanutils" name="commons-beanutils" version="1.11.0">
+         <artifact name="commons-beanutils-1.11.0.jar">
+            <pgp value="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB"/>
+         </artifact>
+      </component>
+      <component group="org.antlr" name="antlr4-runtime" version="4.13.2">
+         <artifact name="antlr4-runtime-4.13.2.jar">
+            <pgp value="5719E50EAC5A4B1DD390B72C2A742740E08E7F8D"/>
+         </artifact>
+      </component>
+      <component group="org.apache.xbean" name="xbean-reflect" version="3.7">
+         <artifact name="xbean-reflect-3.7.jar">
+            <pgp value="223D3A74B068ECA354DC385CE126833F9CF64915"/>
+         </artifact>
+      </component>
       <component group="org.asciidoctor" name="asciidoctor-gradle-base" version="4.0.4">
          <artifact name="asciidoctor-gradle-base-4.0.4.jar">
             <sha256 value="a166d8ceab124de10093d65c63444cf6ce4015b564158a1cdce56e1c8864721c" origin="Downloaded the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-base/4.0.4 and generated the checksum locally" reason="Artifact is not signed"/>
@@ -69,6 +100,16 @@
       <component group="org.asciidoctor" name="asciidoctor-gradle-jvm" version="4.0.4">
          <artifact name="asciidoctor-gradle-jvm-4.0.4.jar">
             <sha256 value="f3448ca295830c56202723d04347c7bb56240bf9143d047329083d9e41e166d6" origin="Downloaded the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-jvm/4.0.4 and generated the checksum locally" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="org.codehaus.plexus" name="plexus-classworlds" version="2.6.0">
+         <artifact name="plexus-classworlds-2.6.0.jar">
+            <pgp value="B02137D875D833D9B23392ECAE5A7FB608A0221C"/>
+         </artifact>
+      </component>
+      <component group="org.jspecify" name="jspecify" version="1.0.0">
+         <artifact name="jspecify-1.0.0.jar">
+            <sha256 value="1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab" origin="Generated by Gradle" reason="A key couldn't be downloaded"/>
          </artifact>
       </component>
    </components>
