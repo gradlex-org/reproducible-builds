@@ -27,7 +27,20 @@ plugins {
 
 This sections explains each of the configurations the plugin applies to your build.
 
-=== Archive tasks
+=== Compilation tasks
+
+.Table Configuration applied to tasks of type `JavaCompile`, `JavaDoc`, `GroovyCompile`, and `ScalaCompile`
+|===
+|Setting|Value|Explanation
+
+|`options.encoding`
+|`UTF_8`
+|If not configured, the platform encoding is used.
+|===
+
+=== Archive tasks (Gradle 8.x only)
+
+NOTE: Since 9.0.0, Gradle core https://docs.gradle.org/current/userguide/upgrading_major_version_9.html#reproducible_archives_by_default[covers this aspect of reproducibility directly]
 
 .Table Configuration applied to tasks of type `AbstractArchiveTask`
 |===
@@ -48,15 +61,4 @@ This sections explains each of the configurations the plugin applies to your bui
 |`filePermissions`
 |`unix("644")`
 | If not configured, permissions are influence by the operating system on which the build is running and usually differ between Unix and Windows.
-|===
-
-=== Compilation tasks
-
-.Table Configuration applied to tasks of type `JavaCompile`, `JavaDoc`, `GroovyCompile`, and `ScalaCompile`
-|===
-|Setting|Value|Explanation
-
-|`options.encoding`
-|`UTF_8`
-|If not configured, the platform encoding is used.
 |===

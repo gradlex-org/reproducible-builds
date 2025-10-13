@@ -32,19 +32,13 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
 
     private static final GradleVersion MINIMUM_SUPPORTED_VERSION = GradleVersion.version("8.3");
+    private static final boolean GRADLE_9 = GradleVersion.current().compareTo(GradleVersion.version("9.0.0")) >= 0;
 
     @Override
     public void apply(Project project) {
         if (GradleVersion.current().compareTo(MINIMUM_SUPPORTED_VERSION) < 0) {
             throw new IllegalStateException("Plugin requires at least Gradle " + MINIMUM_SUPPORTED_VERSION.getVersion());
         }
-
-        project.getTasks().withType(AbstractArchiveTask.class).configureEach(task -> {
-            task.setPreserveFileTimestamps(false);
-            task.setReproducibleFileOrder(true);
-            task.dirPermissions(p -> p.unix("755"));
-            task.filePermissions(p -> p.unix("644"));
-        });
 
         project.getTasks().withType(JavaCompile.class).configureEach(task -> {
             task.getOptions().setEncoding(UTF_8.name());
@@ -64,6 +58,19 @@ public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
         project.getTasks().withType(ScalaCompile.class).configureEach(task -> {
             task.getOptions().setEncoding(UTF_8.name());
             task.getScalaCompileOptions().setEncoding(UTF_8.name());
+        });
+
+        if (!GRADLE_9) {
+            applyGradle8SpecificDefaults(project);
+        }
+    }
+
+    private void applyGradle8SpecificDefaults(Project project) {
+        project.getTasks().withType(AbstractArchiveTask.class).configureEach(task -> {
+            task.setPreserveFileTimestamps(false);
+            task.setReproducibleFileOrder(true);
+            task.dirPermissions(p -> p.unix("755"));
+            task.filePermissions(p -> p.unix("644"));
         });
     }
 }
