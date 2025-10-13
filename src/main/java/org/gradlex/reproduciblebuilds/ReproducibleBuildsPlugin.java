@@ -23,10 +23,14 @@ import org.gradle.api.tasks.compile.JavaCompile;
 import org.gradle.api.tasks.javadoc.Javadoc;
 import org.gradle.api.tasks.scala.ScalaCompile;
 import org.gradle.external.javadoc.StandardJavadocDocletOptions;
+import org.gradle.process.CommandLineArgumentProvider;
 import org.gradle.util.GradleVersion;
 import org.jspecify.annotations.NullMarked;
 
+import java.util.List;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Collections.singletonList;
 
 @NullMarked
 public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
@@ -41,7 +45,11 @@ public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
         }
 
         project.getTasks().withType(JavaCompile.class).configureEach(task -> {
+            @SuppressWarnings("UnstableApiUsage") List<CommandLineArgumentProvider> argumentProviders =
+                    task.getOptions().getForkOptions().getJvmArgumentProviders();
             task.getOptions().setEncoding(UTF_8.name());
+            task.getOptions().setFork(true);
+            argumentProviders.add(() -> singletonList("-Dline.separator=\n"));
         });
         project.getTasks().withType(Javadoc.class).configureEach(task -> {
             task.getOptions().setEncoding(UTF_8.name());
