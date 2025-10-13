@@ -21,6 +21,7 @@ import org.gradlex.reproduciblebuilds.fixture.TestProject;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LineEndingFuncTest {
 
     @Test
+    @DisabledIfSystemProperty(named = "gradleVersionUnderTest", matches = "8\\.3")
     void annotation_processors_always_use_unix_line_ending(@TestProject GradleBuild build) {
         build.getBuildFile().writeText("""
                 plugins {

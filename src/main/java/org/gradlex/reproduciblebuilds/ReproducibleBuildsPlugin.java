@@ -36,7 +36,8 @@ import static java.util.Collections.singletonList;
 public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
 
     private static final GradleVersion MINIMUM_SUPPORTED_VERSION = GradleVersion.version("8.3");
-    private static final boolean GRADLE_9 = GradleVersion.current().compareTo(GradleVersion.version("9.0.0")) >= 0;
+    private static final boolean MIN_GRADLE_8_14 = GradleVersion.current().compareTo(GradleVersion.version("8.14")) >= 0;
+    private static final boolean MIN_GRADLE_9_0 = GradleVersion.current().compareTo(GradleVersion.version("9.0.0")) >= 0;
 
     @Override
     public void apply(Project project) {
@@ -49,7 +50,10 @@ public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
                     task.getOptions().getForkOptions().getJvmArgumentProviders();
             task.getOptions().setEncoding(UTF_8.name());
             task.getOptions().setFork(true);
-            argumentProviders.add(() -> singletonList("-Dline.separator=\n"));
+            if (MIN_GRADLE_8_14) {
+                // https://github.com/gradle/gradle/issues/27385
+                argumentProviders.add(() -> singletonList("-Dline.separator=\n"));
+            }
         });
         project.getTasks().withType(Javadoc.class).configureEach(task -> {
             task.getOptions().setEncoding(UTF_8.name());
@@ -68,7 +72,7 @@ public abstract class ReproducibleBuildsPlugin implements Plugin<Project> {
             task.getScalaCompileOptions().setEncoding(UTF_8.name());
         });
 
-        if (!GRADLE_9) {
+        if (!MIN_GRADLE_9_0) {
             applyGradle8SpecificDefaults(project);
         }
     }
