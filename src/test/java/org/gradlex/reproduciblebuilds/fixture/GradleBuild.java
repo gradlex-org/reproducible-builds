@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GradleBuild implements AutoCloseable {
+    public static final String GRADLE_VERSION_UNDER_TEST = System.getProperty("gradleVersionUnderTest");
 
     final Directory projectDir;
     final WritableFile buildFile;
@@ -83,6 +84,9 @@ public class GradleBuild implements AutoCloseable {
                 .withDebug(ManagementFactory.getRuntimeMXBean().getInputArguments().toString().indexOf("-agentlib:jdwp") > 0);
         if (!environment.isEmpty()) {
             runner.withEnvironment(environment);
+        }
+        if (GRADLE_VERSION_UNDER_TEST != null) {
+            runner.withGradleVersion(GRADLE_VERSION_UNDER_TEST);
         }
         return runner;
     }

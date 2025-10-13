@@ -51,8 +51,18 @@ pluginPublishConventions {
     }
 }
 
+@Suppress("UnstableApiUsage")
 testing.suites.named<JvmTestSuite>("test") {
     useJUnitJupiter()
+    listOf("8.3", "8.14.3", "9.0.0").forEach { gradleVersionUnderTest ->
+        targets.register("test${gradleVersionUnderTest}") {
+            testTask {
+                group = LifecycleBasePlugin.VERIFICATION_GROUP
+                description = "Runs tests against Gradle $gradleVersionUnderTest"
+                systemProperty("gradleVersionUnderTest", gradleVersionUnderTest)
+            }
+        }
+    }
     dependencies {
         implementation("org.apache.commons:commons-compress:1.28.0") {
             because("For asserting file permissions in zip files")
