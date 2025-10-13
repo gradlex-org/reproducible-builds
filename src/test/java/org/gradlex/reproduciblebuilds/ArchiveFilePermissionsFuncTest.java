@@ -69,7 +69,9 @@ class ArchiveFilePermissionsFuncTest {
 
     @Test
     @DisabledOnOs(OS.WINDOWS)
-    void plugin_sets_all_file_permissions_in_archives_to_not_rely_on_underlying_file_system(@TestProject GradleBuild build) {
+    void file_permissions_in_archives_do_not_rely_on_underlying_file_system(@TestProject GradleBuild build) {
+        // Gradle 8: This test makes sure that the 'reproducible-builds' plugin provides the tested functionality
+        // Gradle 9: This test makes sure that the Gradle itself provides the tested functionality
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
         build.getBuildFile().appendText("""
                 interface InjectedExecOps {
