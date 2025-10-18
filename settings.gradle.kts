@@ -1,26 +1,3 @@
-pluginManagement {
-    includeBuild("gradle/plugins")
-}
-
-plugins {
-    id("com.gradle.develocity") version "4.2.2"
-    id("com.gradle.common-custom-user-data-gradle-plugin") version "2.4.0"
-    id("gradlexbuild.build-parameters")
-}
+plugins { id("org.gradlex.internal-build-conventions") version "0.7" }
 
 rootProject.name = "reproducible-builds"
-
-dependencyResolutionManagement {
-    repositories.mavenCentral()
-}
-
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
-        termsOfUseAgree = "yes"
-
-        // required to bind this to a local variable for configuration cache compatibility
-        val isCi = buildParameters.ci
-        publishing.onlyIf { isCi }
-    }
-}

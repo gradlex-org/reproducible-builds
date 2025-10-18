@@ -1,37 +1,18 @@
-plugins {
-    id("gradlexbuild.build-parameters")
-    id("gradlexbuild.documentation-conventions")
-    id("org.gradlex.internal.plugin-publish-conventions") version "0.6"
-}
-
-group = "org.gradlex"
 version = "1.1"
 
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
+dependencies {
+    testImplementation("org.apache.commons:commons-compress:1.28.0") {
+        because("For asserting file permissions in zip files")
+    }
 }
 
-tasks.compileJava {
-    options.release = 8
-    options.compilerArgs.add("-Werror")
-}
-
-tasks.javadoc {
-    // Enable all JavaDoc checks, but the one requiring JavaDoc everywhere
-    (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:all,-missing", "-Xwerror")
-}
-
-checkstyle {
-    // use default version Gradle 8.14 shipped with
-    toolVersion = "9.3"
-}
-
-pluginPublishConventions {
-    id("${project.group}.${project.name}")
-    implementationClass("org.gradlex.reproduciblebuilds.ReproducibleBuildsPlugin")
-    displayName("Reproducible Builds Gradle Plugin")
-    description("Reproducibility settings applied to Gradle's built-in tasks.")
-    tags("gradlex", "reproducible builds")
+publishingConventions {
+    pluginPortal("${project.group}.${project.name}") {
+        implementationClass("org.gradlex.reproduciblebuilds.ReproducibleBuildsPlugin")
+        displayName("Reproducible Builds Gradle Plugin")
+        description("Reproducibility settings applied to Gradle's built-in tasks.")
+        tags("gradlex", "reproducible builds")
+    }
     gitHub("https://github.com/gradlex-org/reproducible-builds")
     website("https://gradlex.org/reproducible-builds")
     developer {
@@ -51,30 +32,4 @@ pluginPublishConventions {
     }
 }
 
-@Suppress("UnstableApiUsage")
-testing.suites.named<JvmTestSuite>("test") {
-    useJUnitJupiter()
-    listOf("8.3", "8.14.3", "9.0.0").forEach { gradleVersionUnderTest ->
-        targets.register("test${gradleVersionUnderTest}") {
-            testTask {
-                group = LifecycleBasePlugin.VERIFICATION_GROUP
-                description = "Runs tests against Gradle $gradleVersionUnderTest"
-                systemProperty("gradleVersionUnderTest", gradleVersionUnderTest)
-            }
-        }
-    }
-    dependencies {
-        implementation("org.apache.commons:commons-compress:1.28.0") {
-            because("For asserting file permissions in zip files")
-        }
-    }
-    targets.all {
-        testTask {
-            maxParallelForks = 4
-        }
-    }
-}
-
-tasks.publishPlugins {
-    dependsOn(tasks.check)
-}
+testingConventions { testGradleVersions("8.3", "8.14.3", "9.0.0") }
