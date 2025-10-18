@@ -28,16 +28,31 @@
          <trusted-key id="7B79ADD11F8A779FE90FD3D0893A028475557671" group="com.gradle"/>
 
 
-         <!-- TESTING - JUnit and Gradle Exemplar with transitive dependencies -->
+         <!-- TESTING - JUnit, AssertJ, and Gradle Exemplar with transitive dependencies -->
          <!-- ✅ Signed by JUnit - Marc Philipp -->
          <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51">
             <trusting group="junit"/>
             <trusting group="org.apiguardian"/>
+            <trusting group="org.junit.jupiter"/>
+            <trusting group="org.junit.platform"/>
+            <trusting group="org.junit.vintage"/>
             <trusting group="org.opentest4j"/>
-            <trusting group="^org[.]junit($|([.].*))" regex="true"/>
          </trusted-key>
          <!-- ✅ Signed by Hamcrest - Tom Denley -->
          <trusted-key id="4DB1A49729B053CAF015CEE9A6ADFC93EF34893E" group="org.hamcrest" name="hamcrest-core"/>
+         <!-- ✅ Signed by Gradle Inc. -->
+         <trusted-key id="1BD97A6A154E7810EE0BC832E2F38302C8075E3D" group="org.gradle.exemplar"/>
+         <!-- ✅ Signed by ASF - Gary David Gregory -->
+         <trusted-key id="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB">
+            <trusting group="org.apache.commons"/>
+            <trusting group="commons-io"/>
+         </trusted-key>
+         <!-- ✅ Signed by Andrea Peruffo - com.typesafe.config  -->
+         <trusted-key id="E88BF2559874BA889D34357C0555B3BA1CA4ECF9" group="com.typesafe" name="config"/>
+         <!-- ✅ Signed by AssertJ  -->
+         <trusted-key id="BE685132AFD2740D9095F9040CC0B712FEE75827" group="org.assertj" name="assertj-core"/>
+         <!-- ✅ Signed by Rafael Winterhalter - ByteBuddy -->
+         <trusted-key id="A7892505CF1A58076453E52D7999BEFBA1039E8B" group="net.bytebuddy" name="byte-buddy"/>
 
 
          <!-- CODE DOCUMENTATION - Asciidoctor Gradle Plugin with transitive dependencies -->
@@ -61,7 +76,10 @@
          <!-- ✅ Signed by JetBrains -->
          <trusted-key id="6F538074CCEBF35F28AF9B066A0975F8B1127B83" group="org.jetbrains.kotlin"/>
          <!-- ✅ Signed by Square (squareup.com) -->
-         <trusted-key id="DBD744ACE7ADE6AA50DD591F66B50994442D2D40" group="^com[.]squareup($|([.].*))" regex="true"/>
+         <trusted-key id="DBD744ACE7ADE6AA50DD591F66B50994442D2D40">
+            <trusting group="com.squareup.okhttp3"/>
+            <trusting group="com.squareup.okio"/>
+         </trusted-key>
          <!-- ✅ Signed by Daniel Lemire - JavaEWAH -->
          <trusted-key id="015479E1055341431B4545AB72475FD306B9CAB7" group="com.googlecode.javaewah" name="JavaEWAH"/>
          <!-- ✅ Signed by Matthias Sohn - JGit -->
@@ -81,6 +99,7 @@
             <trusting group="org.jetbrains.intellij.deps"/>
             <trusting group="com.diffplug.durian"/>
          </trusted-key>
+
       </trusted-keys>
    </configuration>
    <components>
