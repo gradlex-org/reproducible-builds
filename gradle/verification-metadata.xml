@@ -100,6 +100,31 @@
             <trusting group="com.diffplug.durian"/>
          </trusted-key>
 
+
+         <!-- CODE FORMATTING - Palantir Java formatter with transitive dependencies -->
+         <!-- ✅ Signed by Palantir -->
+         <trusted-key id="1D9866E375A1435ACE0BE0ADE3461D2D16725F94" group="com.palantir.javaformat"/>
+         <!-- ✅ Signed by Tatu Saloranta - Jackson -->
+         <trusted-key id="28118C070CB22A0175A2E8D43D12CA2AC19F3181">
+            <trusting group="com.fasterxml.jackson.core"/>
+            <trusting group="com.fasterxml.jackson.datatype"/>
+            <trusting group="com.fasterxml.jackson.module"/>
+         </trusted-key>
+         <!-- ✅ Signed by Christopher Povirk - Guava -->
+         <trusted-key id="BDB5FA4FE719D787FB3D3197F6D4A1D411E9D1AE" group="com.google.guava" name="guava"/>
+         <!-- ✅ Jean-Baptiste Giraudeau - Functional Java -->
+         <trusted-key id="3448B9AECE73A41DC11FEE9ADDF3944950267CD1" group="org.functionaljava" name="functionaljava"/>
+
+
+         <!-- CODE FORMATTING - ktfmt with transitive dependencies -->
+         <!-- ✅ Signed by Ktfmt Team -->
+         <trusted-key id="648190996EC0930A6D7D49A978178478013521D0" group="com.facebook" name="ktfmt"/>
+         <!-- ✅ Signed by Liam Miller-Cushon (Error Prone releases) -->
+         <trusted-key id="EE0CA873074092F806F59B65D364ABAA39A47320" group="com.google.googlejavaformat" name="google-java-format"/>
+         <!-- ✅ Signed by JetBrains -->
+         <trusted-key id="E7DC75FC24FB3C8DFE8086AD3D5839A2262CBBFB" group="org.jetbrains.kotlinx" name="kotlinx-coroutines-core-jvm"/>
+         <!-- ✅ Signed by Timothy Wall - Java Native Access (JNA) -->
+         <trusted-key id="78DA3333F653B1C54A938BE24DB7BC57DFDBCEA4" group="net.java.dev.jna" name="jna"/>
       </trusted-keys>
    </configuration>
    <components>
