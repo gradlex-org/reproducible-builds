@@ -11,65 +11,34 @@
          <trust file="^gradle-\d+\.\d+(?:\.\d+)?(?:-(?:rc|milestone)-\d+)?-src\.zip$" regex="true"/>
       </trusted-artifacts>
       <trusted-keys>
-         <trusted-key id="06D34ED6FF73DE368A772A781063FE98BCECB758" group="com.puppycrawl.tools" name="checkstyle"/>
-         <trusted-key id="0CC641C3A62453AB390066C4A41F13C999945293" group="commons-collections" name="commons-collections"/>
-         <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework" name="checker-qual"/>
+         <!-- Provided by the GradleX organisation -->
+         <trusted-key id="66D7CBFF956830FE9F5A723AFE6C7D77A1CE15A6" group="org.gradlex"/>
+
+         <!-- Provided by Gradle Inc -->
          <trusted-key id="1BD97A6A154E7810EE0BC832E2F38302C8075E3D">
             <trusting group="com.gradle.publish" name="plugin-publish-plugin"/>
             <trusting group="org.gradle.kotlin" name="gradle-kotlin-dsl-plugins"/>
          </trusted-key>
+         <trusted-key id="7B79ADD11F8A779FE90FD3D0893A028475557671" group="com.gradle"/>
+
+         <!-- Provided by the ASF organisation -->
          <trusted-key id="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB">
             <trusting group="commons-codec"/>
             <trusting group="commons-io"/>
             <trusting group="org.apache.commons"/>
          </trusted-key>
-         <trusted-key id="2E3A1AFFE42B5F53AF19F780BCF4173966770193" group="org.jetbrains" name="annotations"/>
-         <trusted-key id="3690C240CE51B4670D30AD1C38EE757D69184620" group="org.tukaani" name="xz"/>
-         <trusted-key id="3F2A008A91D11A7FAC4A0786F13D3E721D56BD54" group="org.reflections" name="reflections"/>
-         <trusted-key id="416952B945B78A34C6C7678562EBFC78FE4156D1" group="org.jruby" name="jruby-complete"/>
-         <trusted-key id="4C5F68D09D42BA7FAC888DF9A929EA2321FDBF8F" group="net.sf.saxon" name="Saxon-HE"/>
-         <trusted-key id="66D7CBFF956830FE9F5A723AFE6C7D77A1CE15A6" group="org.gradlex"/>
-         <trusted-key id="694621A7227D8D5289699830ABE9F3126BB741C1" group="com.google.guava"/>
-         <trusted-key id="6F538074CCEBF35F28AF9B066A0975F8B1127B83" group="org.jetbrains.kotlin"/>
-         <trusted-key id="7616EB882DAF57A11477AAF559A252FB1199D873" group="com.google.code.findbugs" name="jsr305"/>
-         <trusted-key id="7B79ADD11F8A779FE90FD3D0893A028475557671" group="com.gradle"/>
-         <trusted-key id="84789D24DF77A32433CE1F079EB80E92EB2135B1" group="org.apache" name="apache"/>
-         <trusted-key id="8756C4F765C9AC3CB6B85D62379CE192D401AB61" group="org.jetbrains.intellij.deps" name="trove4j"/>
-         <trusted-key id="AA417737BD805456DB3CBDDE6601E5C08DCCBB96" group="info.picocli" name="picocli"/>
-         <trusted-key id="AD296CA014321485EB6780FF8B8E0CB0F6A7657E" group="org.asciidoctor"/>
-         <trusted-key id="B01128C8FD304FE48E6EED2C347CD0EAED975C5F" group="org.antlr" name="antlr4-runtime"/>
          <trusted-key id="B02137D875D833D9B23392ECAE5A7FB608A0221C" group="org.apache.maven"/>
-         <trusted-key id="B6E73D84EA4FCC47166087253FAAD2CD5ECBB314">
-            <trusting group="commons-beanutils"/>
-            <trusting group="org.apache.commons"/>
-         </trusted-key>
-         <trusted-key id="B801E2F8EF035068EC1139CC29579F18FA8FD93B" group="com.google.j2objc" name="j2objc-annotations"/>
-         <trusted-key id="BDB5FA4FE719D787FB3D3197F6D4A1D411E9D1AE" group="com.google.guava"/>
-         <trusted-key id="C70B844F002F21F6D2B9C87522E44AC0622B91C3" group="com.beust" name="jcommander"/>
-         <trusted-key id="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7" group="com.google.code.gson"/>
-         <trusted-key id="D477D51812E692011DB11E66A6EA2E2BF22E0543" group="io.github.java-diff-utils" name="java-diff-utils"/>
-         <trusted-key id="E5C3B1929191DF06136CCB2B164779204E106A76" group="org.javassist" name="javassist"/>
-         <trusted-key id="E77417AC194160A3FABD04969A259C7EE636C5ED" group="com.google.errorprone"/>
-         <trusted-key id="E7DC75FC24FB3C8DFE8086AD3D5839A2262CBBFB" group="org.jetbrains.kotlinx" name="kotlinx-coroutines-core-jvm"/>
-         <trusted-key id="EA022560A81E5BD48DB3D18B54AC8E2D98CFEAC6" group="org.ysb33r.gradle"/>
-         <trusted-key id="EE0CA873074092F806F59B65D364ABAA39A47320" group="com.google.errorprone"/>
+
+         <!-- Provided by JUnit (testing only) -->
          <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51">
+            <trusting group="junit"/>
             <trusting group="org.apiguardian"/>
             <trusting group="org.opentest4j"/>
             <trusting group="^org[.]junit($|([.].*))" regex="true"/>
          </trusted-key>
+         <trusted-key id="4DB1A49729B053CAF015CEE9A6ADFC93EF34893E" group="org.hamcrest" name="hamcrest-core"/>
       </trusted-keys>
    </configuration>
    <components>
-      <component group="org.asciidoctor" name="asciidoctor-gradle-base" version="4.0.5">
-         <artifact name="asciidoctor-gradle-base-4.0.5.jar">
-            <sha256 value="3b0a5c953c98977da3cec1bfd66c0f7438e3e07c06bda00abae8c53e4dd2185a" origin="Downloaded the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-base/4.0.5 and generated the checksum locally" reason="Artifact is not signed"/>
-         </artifact>
-      </component>
-      <component group="org.asciidoctor" name="asciidoctor-gradle-jvm" version="4.0.5">
-         <artifact name="asciidoctor-gradle-jvm-4.0.5.jar">
-            <sha256 value="3e020e7f350cb6ff2658ff124ea63d42da3dacf6da3b71efe4c7670413369ce9" origin="Downloaded the file from https://plugins.gradle.org/m2/org/asciidoctor/asciidoctor-gradle-jvm/4.0.5 and generated the checksum locally" reason="Artifact is not signed"/>
-         </artifact>
-      </component>
    </components>
 </verification-metadata>
