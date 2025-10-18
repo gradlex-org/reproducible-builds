@@ -11,38 +11,42 @@
          <trust file="^gradle-\d+\.\d+(?:\.\d+)?(?:-(?:rc|milestone)-\d+)?-src\.zip$" regex="true"/>
       </trusted-artifacts>
       <trusted-keys>
-         <!-- Provided by the GradleX organisation -->
+         <!-- BUILD: CONVENTIONS -->
+         <!-- ✅ Signed by the GradleX organisation (us) -->
          <trusted-key id="66D7CBFF956830FE9F5A723AFE6C7D77A1CE15A6" group="org.gradlex"/>
 
-         <!-- Provided by Gradle Inc -->
-         <trusted-key id="1BD97A6A154E7810EE0BC832E2F38302C8075E3D">
-            <trusting group="com.gradle.publish" name="plugin-publish-plugin"/>
-            <trusting group="org.gradle.kotlin" name="gradle-kotlin-dsl-plugins"/>
-         </trusted-key>
-         <trusted-key id="7B79ADD11F8A779FE90FD3D0893A028475557671" group="com.gradle"/>
 
-         <!-- Provided by the ASF organisation -->
-         <trusted-key id="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB">
-            <trusting group="commons-codec"/>
-            <trusting group="commons-io"/>
-            <trusting group="org.apache.commons"/>
-         </trusted-key>
+         <!-- BUILD: PLUGIN PUBLISHING - Gradle plugin publishing plugin with transitive dependency -->
+         <!-- ✅ Signed by Gradle Inc. -->
+         <trusted-key id="1BD97A6A154E7810EE0BC832E2F38302C8075E3D" group="com.gradle.publish" name="plugin-publish-plugin"/>
+         <!-- ✅ Signed by ASF - Robert Scholte -->
          <trusted-key id="B02137D875D833D9B23392ECAE5A7FB608A0221C" group="org.apache.maven"/>
 
-         <!-- Provided by JUnit (testing only) -->
+
+         <!-- BUILD: ANALYSIS - Gradle Develocity plugin -->
+         <trusted-key id="7B79ADD11F8A779FE90FD3D0893A028475557671" group="com.gradle"/>
+
+
+         <!-- TESTING - JUnit and Gradle Exemplar with transitive dependencies -->
+         <!-- ✅ Signed by JUnit - Marc Philipp -->
          <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51">
             <trusting group="junit"/>
             <trusting group="org.apiguardian"/>
             <trusting group="org.opentest4j"/>
             <trusting group="^org[.]junit($|([.].*))" regex="true"/>
          </trusted-key>
+         <!-- ✅ Signed by Hamcrest - Tom Denley -->
          <trusted-key id="4DB1A49729B053CAF015CEE9A6ADFC93EF34893E" group="org.hamcrest" name="hamcrest-core"/>
 
-         <!-- Provided by Schalk W. Cronjé - ysb33r (documentation only)-->
+
+         <!-- CODE DOCUMENTATION - Asciidoctor Gradle Plugin with transitive dependencies -->
+         <!-- ✅ Signed by Schalk W. Cronjé - ysb33r -->
          <trusted-key id="EA022560A81E5BD48DB3D18B54AC8E2D98CFEAC6" group="org.ysb33r.gradle"/>
-         <!-- Provided by Robert Panzer - AsciidoctorJ (documentation only)-->
+         <!-- ✅ Signed by Robert Panzer - AsciidoctorJ -->
          <trusted-key id="AD296CA014321485EB6780FF8B8E0CB0F6A7657E" group="org.asciidoctor"/>
-         <!-- Provided by Lasse Collin - Tukaani (documentation only)-->
+         <!-- ✅ Signed by ASF - Gary David Gregory -->
+         <trusted-key id="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB" name="commons-collections4"/>
+         <!-- ✅ Signed by Lasse Collin - Tukaani -->
          <trusted-key id="3690C240CE51B4670D30AD1C38EE757D69184620" group="org.tukaani" name="xz"/>
       </trusted-keys>
    </configuration>
