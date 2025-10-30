@@ -75,6 +75,10 @@
          <trusted-key id="AD296CA014321485EB6780FF8B8E0CB0F6A7657E" group="org.asciidoctor"/>
          <!-- ✅ Signed by Lasse Collin - Tukaani -->
          <trusted-key id="3690C240CE51B4670D30AD1C38EE757D69184620" group="org.tukaani" name="xz"/>
+         <!-- ✅ Signed by Cedric Beust - JCommander -->
+         <trusted-key id="C70B844F002F21F6D2B9C87522E44AC0622B91C3" group="com.beust" name="jcommander"/>
+         <!-- ✅ Signed by Thomas E. Enebo - JRuby Team -->
+         <trusted-key id="416952B945B78A34C6C7678562EBFC78FE4156D1" group="org.jruby" name="jruby-complete"/>
 
 
          <!-- CODE FORMATTING - Spotless Gradle Plugin with transitive dependencies -->
