@@ -1,21 +1,12 @@
-/*
- * Copyright the GradleX team.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
+// SPDX-License-Identifier: Apache-2.0
 package org.gradlex.reproduciblebuilds;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradlex.reproduciblebuilds.fixture.GradleBuild;
 import org.gradlex.reproduciblebuilds.fixture.TestProject;
@@ -23,26 +14,21 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class EncodingFuncTest {
 
     @Test
     void plugin_sets_encoding_to_utf8(@TestProject GradleBuild build) {
         String data;
-        try(var is = EncodingFuncTest.class.getResourceAsStream("utf8.txt")) {
+        try (var is = EncodingFuncTest.class.getResourceAsStream("utf8.txt")) {
             data = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
-        build.getBuildFile().writeText("""
+
+        build.getBuildFile()
+                .writeText(
+                        """
                 plugins {
                     id 'java'
                     id 'groovy'
@@ -50,11 +36,11 @@ class EncodingFuncTest {
                     id 'application'
                     id 'org.gradlex.reproducible-builds'
                 }
-                
+
                 repositories {
                     mavenCentral()
                 }
-                
+
                 application {
                     mainClass = "Test"
                 }
@@ -80,7 +66,10 @@ class EncodingFuncTest {
                 }
                 """);
 
-        build.getProjectDir().file("src/main/java/Test.java").writeText("""
+        build.getProjectDir()
+                .file("src/main/java/Test.java")
+                .writeText(
+                        """
                 public class Test {
                     public static void main(String[] args) {
                         JavaClass.print();
@@ -92,36 +81,56 @@ class EncodingFuncTest {
                 }
         """);
 
-        build.getProjectDir().file("src/main/java/JavaClass.java").writeText("""
+        build.getProjectDir()
+                .file("src/main/java/JavaClass.java")
+                .writeText(
+                        """
                 /**
                  * $DATA
                  */
                 public class JavaClass { public static void print() { System.out.println("0 $DATA"); } }
-                """.replace("$DATA", data));
-        build.getProjectDir().file("src/main/groovy/JavaClassInGroovyFolder.java").writeText("""
+                """
+                                .replace("$DATA", data));
+        build.getProjectDir()
+                .file("src/main/groovy/JavaClassInGroovyFolder.java")
+                .writeText(
+                        """
                 /**
                  * $DATA
                  */
                 public class JavaClassInGroovyFolder { public static void print() { System.out.println("1 $DATA"); }; }
-                """.replace("$DATA", data));
-        build.getProjectDir().file("src/main/scala/JavaClassInScalaFolder.java").writeText("""
+                """
+                                .replace("$DATA", data));
+        build.getProjectDir()
+                .file("src/main/scala/JavaClassInScalaFolder.java")
+                .writeText(
+                        """
                 /**
                  * $DATA
                  */
                 public class JavaClassInScalaFolder { public static void print() { System.out.println("2 $DATA"); } }
-                """.replace("$DATA", data));
-        build.getProjectDir().file("src/main/groovy/GroovyClass.groovy").writeText("""
+                """
+                                .replace("$DATA", data));
+        build.getProjectDir()
+                .file("src/main/groovy/GroovyClass.groovy")
+                .writeText(
+                        """
                 /**
                  * $DATA
                  */
                 class GroovyClass { static print() { println("3 $DATA") } }
-                """.replace("$DATA", data));
-        build.getProjectDir().file("src/main/scala/ScalaClass.scala").writeText("""
+                """
+                                .replace("$DATA", data));
+        build.getProjectDir()
+                .file("src/main/scala/ScalaClass.scala")
+                .writeText(
+                        """
                 /**
                  * $DATA
                  */
                 object ScalaClass { def print = { println("4 $DATA"); } }
-                """.replace("$DATA", data));
+                """
+                                .replace("$DATA", data));
 
         // Run 'groovydoc' first so that it is UP-TO-DATE in the next execution.
         // Workaround for: https://github.com/gradle/gradle/issues/33288
@@ -135,7 +144,9 @@ class EncodingFuncTest {
                 2 $DATA
                 3 $DATA
                 4 $DATA
-                """.replace("$DATA", data), result.getOutput().replace("\r\n", "\n"));
+                """
+                        .replace("$DATA", data),
+                result.getOutput().replace("\r\n", "\n"));
 
         assertTrue(build.output("docs/javadoc/JavaClass.html").contains(data));
         assertTrue(build.output("docs/javadoc/JavaClassInGroovyFolder.html").contains(data));
