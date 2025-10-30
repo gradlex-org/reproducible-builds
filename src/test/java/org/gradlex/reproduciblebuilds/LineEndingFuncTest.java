@@ -1,20 +1,7 @@
-/*
- * Copyright the GradleX team.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
+// SPDX-License-Identifier: Apache-2.0
 package org.gradlex.reproduciblebuilds;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.gradlex.reproduciblebuilds.fixture.GradleBuild;
 import org.gradlex.reproduciblebuilds.fixture.TestProject;
@@ -23,15 +10,15 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LineEndingFuncTest {
 
     @Test
     @DisabledIfSystemProperty(named = "gradleVersionUnderTest", matches = "8\\.3")
     void annotation_processors_always_use_unix_line_ending(@TestProject GradleBuild build) {
-        build.getBuildFile().writeText("""
+        build.getBuildFile()
+                .writeText(
+                        """
                 plugins {
                     id 'java-library'
                     id 'org.gradlex.reproducible-builds'
@@ -44,12 +31,15 @@ class LineEndingFuncTest {
                 }
                 """);
 
-        build.getProjectDir().file("src/main/java/org/example/JsonFactory2.java").writeText("""
+        build.getProjectDir()
+                .file("src/main/java/org/example/JsonFactory2.java")
+                .writeText(
+                        """
                 package org.example;
                 import com.google.auto.service.AutoService;
                 import tools.jackson.core.TokenStreamFactory;
                 import tools.jackson.core.json.JsonFactory;
-                
+
                 @AutoService(TokenStreamFactory.class)
                 public class JsonFactory2 extends JsonFactory { }
                 """);

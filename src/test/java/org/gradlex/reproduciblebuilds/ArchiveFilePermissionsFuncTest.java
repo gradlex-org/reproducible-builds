@@ -1,21 +1,11 @@
-/*
- * Copyright the GradleX team.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
+// SPDX-License-Identifier: Apache-2.0
 package org.gradlex.reproduciblebuilds;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+import java.util.Enumeration;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.gradlex.reproduciblebuilds.fixture.GradleBuild;
@@ -28,18 +18,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
-import java.io.IOException;
-import java.util.Enumeration;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class ArchiveFilePermissionsFuncTest {
 
     @BeforeEach
     void beforeEach(@TestProject GradleBuild build) {
-        build.getBuildFile().writeText("""
+        build.getBuildFile()
+                .writeText(
+                        """
                 plugins {
                     id 'application'
                     id 'org.gradlex.reproducible-builds'
@@ -48,7 +34,10 @@ class ArchiveFilePermissionsFuncTest {
                     mainClass = 'org.example.App'
                 }
                 """);
-        build.getProjectDir().file("src/main/java/org/example/App.java").writeText("""
+        build.getProjectDir()
+                .file("src/main/java/org/example/App.java")
+                .writeText(
+                        """
                 package org.example;
                 public class App {
                     public static void main(String[] args) {}
@@ -73,7 +62,9 @@ class ArchiveFilePermissionsFuncTest {
         // Gradle 8: This test makes sure that the 'reproducible-builds' plugin provides the tested functionality
         // Gradle 9: This test makes sure that the Gradle itself provides the tested functionality
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
-        build.getBuildFile().appendText("""
+        build.getBuildFile()
+                .appendText(
+                        """
                 interface InjectedExecOps {
                     @Inject //@javax.inject.Inject
                     ExecOperations getExecOps()
@@ -104,11 +95,18 @@ class ArchiveFilePermissionsFuncTest {
             while (entries.hasMoreElements()) {
                 ZipArchiveEntry entry = entries.nextElement();
                 if (entry.getName().endsWith("/")) {
-                    assertEquals(16877, entry.getUnixMode(), String.format("Directory '%s' has wrong mode!", entry.getName()));
+                    assertEquals(
+                            16877,
+                            entry.getUnixMode(),
+                            String.format("Directory '%s' has wrong mode!", entry.getName()));
                 } else if (entry.getName().contains("/bin/")) {
-                    assertEquals(33261, entry.getUnixMode(), String.format("Directory '%s' has wrong mode!", entry.getName()));
+                    assertEquals(
+                            33261,
+                            entry.getUnixMode(),
+                            String.format("Directory '%s' has wrong mode!", entry.getName()));
                 } else {
-                    assertEquals(33188, entry.getUnixMode(), String.format("File '%s' has wrong mode!", entry.getName()));
+                    assertEquals(
+                            33188, entry.getUnixMode(), String.format("File '%s' has wrong mode!", entry.getName()));
                 }
             }
         } catch (IOException e) {
