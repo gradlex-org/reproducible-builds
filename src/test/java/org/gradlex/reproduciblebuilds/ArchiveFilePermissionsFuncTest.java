@@ -23,9 +23,7 @@ class ArchiveFilePermissionsFuncTest {
 
     @BeforeEach
     void beforeEach(@TestProject GradleBuild build) {
-        build.getBuildFile()
-                .writeText(
-                        """
+        build.getBuildFile().writeText("""
                 plugins {
                     id 'application'
                     id 'org.gradlex.reproducible-builds'
@@ -34,10 +32,7 @@ class ArchiveFilePermissionsFuncTest {
                     mainClass = 'org.example.App'
                 }
                 """);
-        build.getProjectDir()
-                .file("src/main/java/org/example/App.java")
-                .writeText(
-                        """
+        build.getProjectDir().file("src/main/java/org/example/App.java").writeText("""
                 package org.example;
                 public class App {
                     public static void main(String[] args) {}
@@ -62,9 +57,7 @@ class ArchiveFilePermissionsFuncTest {
         // Gradle 8: This test makes sure that the 'reproducible-builds' plugin provides the tested functionality
         // Gradle 9: This test makes sure that the Gradle itself provides the tested functionality
         WritableFile archive = build.getProjectDir().file("build/distributions/test-project.zip");
-        build.getBuildFile()
-                .appendText(
-                        """
+        build.getBuildFile().appendText("""
                 interface InjectedExecOps {
                     @Inject //@javax.inject.Inject
                     ExecOperations getExecOps()

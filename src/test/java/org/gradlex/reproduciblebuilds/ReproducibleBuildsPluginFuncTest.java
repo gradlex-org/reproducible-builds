@@ -12,9 +12,7 @@ class ReproducibleBuildsPluginFuncTest {
 
     @Test
     void plugin_can_be_applied_to_a_project(@TestProject GradleBuild build) {
-        build.getBuildFile()
-                .writeText(
-                        """
+        build.getBuildFile().writeText("""
                 plugins {
                     id 'java'
                     id 'groovy'
@@ -32,19 +30,13 @@ class ReproducibleBuildsPluginFuncTest {
                 }
                 """);
 
-        build.getProjectDir()
-                .file("src/main/java/JavaClass.java")
-                .writeText("""
+        build.getProjectDir().file("src/main/java/JavaClass.java").writeText("""
                 public class JavaClass {}
                 """);
-        build.getProjectDir()
-                .file("src/main/groovy/GroovyClass.groovy")
-                .writeText("""
+        build.getProjectDir().file("src/main/groovy/GroovyClass.groovy").writeText("""
                 class GroovyClass {}
                 """);
-        build.getProjectDir()
-                .file("src/main/scala/ScalaClass.scala")
-                .writeText("""
+        build.getProjectDir().file("src/main/scala/ScalaClass.scala").writeText("""
                 class ScalaClass {}
                 """);
 

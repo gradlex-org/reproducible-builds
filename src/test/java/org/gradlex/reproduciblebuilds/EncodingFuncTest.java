@@ -26,9 +26,7 @@ class EncodingFuncTest {
             throw new RuntimeException(e);
         }
 
-        build.getBuildFile()
-                .writeText(
-                        """
+        build.getBuildFile().writeText("""
                 plugins {
                     id 'java'
                     id 'groovy'
@@ -66,10 +64,7 @@ class EncodingFuncTest {
                 }
                 """);
 
-        build.getProjectDir()
-                .file("src/main/java/Test.java")
-                .writeText(
-                        """
+        build.getProjectDir().file("src/main/java/Test.java").writeText("""
                 public class Test {
                     public static void main(String[] args) {
                         JavaClass.print();
@@ -81,72 +76,51 @@ class EncodingFuncTest {
                 }
         """);
 
-        build.getProjectDir()
-                .file("src/main/java/JavaClass.java")
-                .writeText(
-                        """
+        build.getProjectDir().file("src/main/java/JavaClass.java").writeText("""
                 /**
                  * $DATA
                  */
                 public class JavaClass { public static void print() { System.out.println("0 $DATA"); } }
-                """
-                                .replace("$DATA", data));
+                """.replace("$DATA", data));
         build.getProjectDir()
                 .file("src/main/groovy/JavaClassInGroovyFolder.java")
-                .writeText(
-                        """
+                .writeText("""
                 /**
                  * $DATA
                  */
                 public class JavaClassInGroovyFolder { public static void print() { System.out.println("1 $DATA"); }; }
-                """
-                                .replace("$DATA", data));
-        build.getProjectDir()
-                .file("src/main/scala/JavaClassInScalaFolder.java")
-                .writeText(
-                        """
+                """.replace("$DATA", data));
+        build.getProjectDir().file("src/main/scala/JavaClassInScalaFolder.java").writeText("""
                 /**
                  * $DATA
                  */
                 public class JavaClassInScalaFolder { public static void print() { System.out.println("2 $DATA"); } }
-                """
-                                .replace("$DATA", data));
-        build.getProjectDir()
-                .file("src/main/groovy/GroovyClass.groovy")
-                .writeText(
-                        """
+                """.replace("$DATA", data));
+        build.getProjectDir().file("src/main/groovy/GroovyClass.groovy").writeText("""
                 /**
                  * $DATA
                  */
                 class GroovyClass { static print() { println("3 $DATA") } }
-                """
-                                .replace("$DATA", data));
-        build.getProjectDir()
-                .file("src/main/scala/ScalaClass.scala")
-                .writeText(
-                        """
+                """.replace("$DATA", data));
+        build.getProjectDir().file("src/main/scala/ScalaClass.scala").writeText("""
                 /**
                  * $DATA
                  */
                 object ScalaClass { def print = { println("4 $DATA"); } }
-                """
-                                .replace("$DATA", data));
+                """.replace("$DATA", data));
 
         // Run 'groovydoc' first so that it is UP-TO-DATE in the next execution.
         // Workaround for: https://github.com/gradle/gradle/issues/33288
         build.run("groovydoc");
         BuildResult result = build.run("build", "run", "-q");
 
-        assertEquals(
-                """
+        assertEquals("""
                 0 $DATA
                 1 $DATA
                 2 $DATA
                 3 $DATA
                 4 $DATA
-                """
-                        .replace("$DATA", data),
-                result.getOutput().replace("\r\n", "\n"));
+                """.replace("$DATA", data), result.getOutput().replace("\r\n", "\n"));
 
         assertTrue(build.output("docs/javadoc/JavaClass.html").contains(data));
         assertTrue(build.output("docs/javadoc/JavaClassInGroovyFolder.html").contains(data));

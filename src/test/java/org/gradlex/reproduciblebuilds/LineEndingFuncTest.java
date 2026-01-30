@@ -16,9 +16,7 @@ class LineEndingFuncTest {
     @Test
     @DisabledIfSystemProperty(named = "gradleVersionUnderTest", matches = "8\\.3")
     void annotation_processors_always_use_unix_line_ending(@TestProject GradleBuild build) {
-        build.getBuildFile()
-                .writeText(
-                        """
+        build.getBuildFile().writeText("""
                 plugins {
                     id 'java-library'
                     id 'org.gradlex.reproducible-builds'
@@ -33,8 +31,7 @@ class LineEndingFuncTest {
 
         build.getProjectDir()
                 .file("src/main/java/org/example/JsonFactory2.java")
-                .writeText(
-                        """
+                .writeText("""
                 package org.example;
                 import com.google.auto.service.AutoService;
                 import tools.jackson.core.TokenStreamFactory;
