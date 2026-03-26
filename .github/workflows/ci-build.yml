@@ -22,6 +22,6 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - uses: gradle/actions/setup-gradle@v5
+      - uses: gradle/actions/setup-gradle@v6
       - uses: testlens-app/setup-testlens@v1.8.0
       - run: "./gradlew build"
