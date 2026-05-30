@@ -34,7 +34,7 @@
 
          <!-- BUILD: MAVEN CENTRAL PUBLISHING - Gradle Up plugin with transitive dependency -->
          <!-- ✅ Signed by GradleUp project -->
-         <trusted-key id="4857D1CE04E78FAB2A172E8F39B48E1BADDB933F" group="com.gradleup.nmcp">
+         <trusted-key id="4857D1CE04E78FAB2A172E8F39B48E1BADDB933F">
             <trusting group="com.gradleup.nmcp"/>
             <trusting group="com.gradleup.gratatouille"/>
          </trusted-key>
